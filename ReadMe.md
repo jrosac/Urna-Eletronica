@@ -1,4 +1,4 @@
-Nome dos participanted:
+Nome dos participantes:
 João Rosa Conceição
 João Pablo da Paz de Jesus
 
