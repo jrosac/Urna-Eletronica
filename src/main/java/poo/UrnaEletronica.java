@@ -1,55 +1,78 @@
+package poo;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 
 public class UrnaEletronica extends JFrame implements ActionListener {
 
-    private int votosCandidato1;
-    private int votosCandidato2;
-    private int votosCandidato3;
+    private JButton[] botoesCandidato;
+    private JLabel[] lblVotosCandidato;
+    private int[] votosCandidato;
+    private int numCandidatos;
 
-    private JButton candidato1Btn;
-    private JButton candidato2Btn;
-    private JButton candidato3Btn;
+    public UrnaEletronica(String nomeArquivo) {
+        super("Urna Eletrônica");
 
-    public UrnaEletronica() {
-        votosCandidato1 = 0;
-        votosCandidato2 = 0;
-        votosCandidato3 = 0;
+        // Lê o nome dos candidatos no txt
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(nomeArquivo));
+            String linha;
+            numCandidatos = 0;
+            while ((linha = br.readLine()) != null) {
+                numCandidatos++;
+            }
+            br.close();
+            br = new BufferedReader(new FileReader(nomeArquivo));
+            String[] nomesCandidato = new String[numCandidatos];
+            for (int i = 0; i < numCandidatos; i++) {
+                nomesCandidato[i] = br.readLine();
+            }
+            br.close();
 
-        candidato1Btn = new JButton("Candidato 1");
-        candidato2Btn = new JButton("Candidato 2");
-        candidato3Btn = new JButton("Candidato 3");
+            //Botões de votação
+            botoesCandidato = new JButton[numCandidatos];
+            for (int i = 0; i < numCandidatos; i++) {
+                botoesCandidato[i] = new JButton(nomesCandidato[i]);
+                botoesCandidato[i].addActionListener(this);
+            }
 
-        candidato1Btn.addActionListener(this);
-        candidato2Btn.addActionListener(this);
-        candidato3Btn.addActionListener(this);
+            // Adiciona os botões de votação ao painel principal
+            JPanel pnlVotacao = new JPanel();
+            pnlVotacao.setLayout(new GridLayout(numCandidatos, 1));
+            for (int i = 0; i < numCandidatos; i++) {
+                pnlVotacao.add(botoesCandidato[i]);
+            }
 
-        JPanel painelBotoes = new JPanel();
-        painelBotoes.setLayout(new GridLayout(3, 1));
-        painelBotoes.add(candidato1Btn);
-        painelBotoes.add(candidato2Btn);
-        painelBotoes.add(candidato3Btn);
+            // Adiciona os painéis ao frame
+            getContentPane().setLayout(new BorderLayout());
+            getContentPane().add(pnlVotacao, BorderLayout.CENTER);
 
-        this.add(painelBotoes);
-        this.pack();
-        this.setVisible(true);
+            // Configura o tamanho do frame
+            setSize(400, 200);
+
+        } catch (IOException e) {
+            System.err.println("Erro ao ler arquivo " + nomeArquivo + ": " + e.getMessage());
+            System.exit(1);
+        }
     }
 
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == candidato1Btn) {
-            votosCandidato1++;
-            System.out.println("Voto para Candidato 1!");
-        } else if (e.getSource() == candidato2Btn) {
-            votosCandidato2++;
-            System.out.println("Voto para Candidato 2!");
-        } else if (e.getSource() == candidato3Btn) {
-            votosCandidato3++;
-            System.out.println("Voto para Candidato 3!");
+    public void actionPerformed(ActionEvent evt) {
+        // Verifica qual botão foi clicado
+        Object source = evt.getSource();
+
+        // Incrementa o contador de votos do candidato correspondente
+        for (int i = 0; i < numCandidatos; i++) {
+            if (source == botoesCandidato[i]) {
+                votosCandidato[i]++;
+                lblVotosCandidato[i].setText(botoesCandidato[i].getText() + ": " + votosCandidato[i]);
+                break;
+            }
         }
     }
 
     public static void main(String[] args) {
-        UrnaEletronica urna = new UrnaEletronica();
+        UrnaEletronica urna = new UrnaEletronica("src/main/resources/candidatos.txt");
+        urna.setVisible(true);
     }
 }
