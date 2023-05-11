@@ -1,2 +1,3 @@
-package poo;public class VerificacaoHash {
+package poo;
+public class VerificacaoHash {
 }

@@ -1,2 +1,3 @@
-package poo;public class VerificacaoUrna {
+package poo;
+public class VerificacaoUrna {
 }
