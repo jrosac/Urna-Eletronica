@@ -4,15 +4,15 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
-public class UrnaEletronica extends JFrame implements ActionListener {
+public class TelaUrna extends JFrame implements ActionListener {
 
     private JButton[] botoesCandidato;
     private JLabel[] lblVotosCandidato;
     private int[] votosCandidato;
     private int numCandidatos;
 
-    public UrnaEletronica(String nomeArquivo) {
-        super("Urna Eletrônica");
+    public TelaUrna(String nomeArquivo) {
+        super("Urna Eletronica");
 
         // Lê o nome dos candidatos no txt
         try {
@@ -72,7 +72,7 @@ public class UrnaEletronica extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        UrnaEletronica urna = new UrnaEletronica("src/main/resources/candidatos.txt");
+        TelaUrna urna = new TelaUrna("src/main/resources/candidatos.txt");
         urna.setVisible(true);
     }
 }

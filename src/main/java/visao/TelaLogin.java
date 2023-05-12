@@ -40,7 +40,7 @@ public class TelaLogin extends JFrame implements ActionListener {
         String cpf = txtCpf.getText();
         if (Validacao.cpf(cpf)) {
             // Abre a urna eletrônica
-            UrnaEletronica urna = new UrnaEletronica("src/main/resources/candidatos.txt");
+            TelaUrna urna = new TelaUrna("src/main/resources/candidatos.txt");
             urna.setVisible(true);
 
             // Fecha a tela de login
