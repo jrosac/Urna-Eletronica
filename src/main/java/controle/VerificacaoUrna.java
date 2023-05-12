@@ -1,3 +1,3 @@
-package poo;
+package controle;
 public class VerificacaoUrna {
 }

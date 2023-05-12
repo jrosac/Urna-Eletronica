@@ -1,4 +1,4 @@
-package poo;
+package visao;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
