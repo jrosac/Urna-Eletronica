@@ -15,9 +15,11 @@ public class TelaUrna extends JFrame implements ActionListener {
     private JButton botaoCorrige;
     private JButton botaoConfirma;
     
-    
     public TelaUrna() {
         super("Urna Eletronica");
+    
+        // Recebe os dados candidatos atraves do arquivo txt
+        Leitura.candidatos("src/main/resources/candidatos.txt");
 
         exibirTeclado();
         }
@@ -85,9 +87,9 @@ public class TelaUrna extends JFrame implements ActionListener {
     }
 
     private void exibirInfo() {
-
-        Candidatos candidato = Leitura.getCandidato(voto);
     
+        Candidatos candidato = Leitura.getCandidato(voto);
+
         if (candidato != null) {
             // Exibe as informações do candidato no display
             String info = "<html><div style='text-align:center;'>";
