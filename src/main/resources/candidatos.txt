@@ -1,3 +1,8 @@
-Felipe Prior
-Gil do vigor
-Cleber Bam Bam
+BRANCO,  ,  ,  
+Interestelar, 2014, src/main/resources/poster/interestelarPoster.jpg
+Star Wars Episodio VII, 2015, src/main/resources/poster/starwars9Poster.jpg
+Rogue one, 2016, src/main/resources/poster/rogueonePoster.jpg
+Blade Runner 2049, 2017, src/main/resources/poster/bladerunnerPoster.jpg
+Jogador Numero 1, 2018, src/main/resources/poster/jogadorn1Poster.jpg
+Star Wars Episodio IX, 2019, src/main/resources/poster/starwars9.jpg
+Nao! nao olhe, 2022, 2022, src/main/resources/poster/nopePoster.jpg
