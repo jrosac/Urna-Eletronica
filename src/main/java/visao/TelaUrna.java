@@ -100,7 +100,7 @@ public class TelaUrna extends JFrame implements ActionListener {
             info += "<img src='" + candidato.getPoster() + "'><br>";
             info += "</div></html>";
             labelDisplay.setText(info);
-            eleitor.setVoto(candidato.getAno());
+            eleitor.setVoto(candidato.getNome());
 
         } 
         
@@ -125,6 +125,8 @@ public class TelaUrna extends JFrame implements ActionListener {
         
         else if (source == botaoConfirma) {
             Escrita.escreverVoto(eleitor);
+            JOptionPane.showMessageDialog(null, "Seu voto para " + eleitor.getVoto() + " foi computado com sucesso!");
+            dispose(); // fecha a janela da urna
         }
         
         else {
