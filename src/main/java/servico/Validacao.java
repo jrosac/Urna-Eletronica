@@ -1,5 +1,8 @@
 package servico;
 
+import controle.*;
+import modelo.*;
+
 public class Validacao {
 
     public static boolean cpf(String cpf) {
@@ -27,5 +30,16 @@ public class Validacao {
 
         // Verifica se os dígitos calculados são iguais aos dígitos informados
         return (Character.getNumericValue(cpf.charAt(9)) == digito1 && Character.getNumericValue(cpf.charAt(10)) == digito2);
+    }
+
+    public static boolean cpfRepetido(String cpf){
+        Eleitores[] eleitores = Leitura.eleitor("src/main/resources/votos.txt");
+
+        for (Eleitores eleitor : eleitores) {
+            if (eleitor.getCpf().equals(cpf)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

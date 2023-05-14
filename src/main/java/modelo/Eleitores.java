@@ -5,6 +5,12 @@ public class Eleitores {
     private String voto;
 
     public Eleitores(){
+
+    }
+    
+    public Eleitores(String cpf, String voto){
+        this.cpf = cpf;
+        this.voto = voto;
     }
 
     public String getCpf() {

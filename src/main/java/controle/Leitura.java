@@ -47,4 +47,29 @@ public class Leitura {
         return null;
     }
 
+    public static Eleitores[] eleitor(String nomeArquivo) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(nomeArquivo));
+            String linha;
+            int numEleitores = 0;
+            while ((linha = br.readLine()) != null) {
+                numEleitores++;
+            }
+            br.close();
+    
+            Eleitores[] eleitores = new Eleitores[numEleitores];
+            br = new BufferedReader(new FileReader(nomeArquivo));
+            for (int i = 0; i < numEleitores; i++) {
+                String[] dadosEleitores = br.readLine().split(", ");
+                eleitores[i] = new Eleitores(dadosEleitores[0], dadosEleitores[1]);
+            }
+            br.close();
+    
+            return eleitores;
+        } catch (IOException e) {
+            System.err.println("Erro ao ler o arquivo " + nomeArquivo + ": " + e.getMessage());
+            return null;
+        }
+    }
+
 }

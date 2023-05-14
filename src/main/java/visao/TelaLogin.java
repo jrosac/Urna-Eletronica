@@ -43,7 +43,7 @@ public void actionPerformed(ActionEvent evt) {
     if (evt.getSource() == btnEntrar) {
         // Verifica se o CPF é válido
         String cpf = txtCpf.getText().replaceAll("[^0-9]", "");
-        if (Validacao.cpf(cpf)) {
+        if (Validacao.cpf(cpf) && !Validacao.cpfRepetido(cpf)) {
             // Abre a urna eletrônica
             TelaUrna urna = new TelaUrna(cpf);
             urna.setVisible(true);
