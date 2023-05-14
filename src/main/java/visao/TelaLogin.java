@@ -44,7 +44,7 @@ public void actionPerformed(ActionEvent evt) {
         String cpf = txtCpf.getText();
         if (Validacao.cpf(cpf)) {
             // Abre a urna eletrônica
-            TelaUrna urna = new TelaUrna("src/main/resources/candidatos.txt");
+            TelaUrna urna = new TelaUrna();
             urna.setVisible(true);
 
             // Fecha a tela de login
