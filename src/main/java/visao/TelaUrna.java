@@ -14,10 +14,14 @@ public class TelaUrna extends JFrame implements ActionListener {
     private JButton botaoBranco;
     private JButton botaoCorrige;
     private JButton botaoConfirma;
+    Eleitores eleitor = new Eleitores();
     
-    public TelaUrna() {
+    public TelaUrna(String cpf) {
         super("Urna Eletronica");
-    
+
+        eleitor.setCpf(cpf);
+        eleitor.setVoto("BRANCO");
+
         // Recebe os dados candidatos atraves do arquivo txt
         Leitura.candidatos("src/main/resources/candidatos.txt");
 
@@ -86,19 +90,21 @@ public class TelaUrna extends JFrame implements ActionListener {
         painelUrna.add(labelDisplay, BorderLayout.EAST);    
     }
 
-    private void exibirInfo() {
-    
-        Candidatos candidato = Leitura.getCandidato(voto);
+    private void exibirInfo(Candidatos candidato) {
 
         if (candidato != null) {
             // Exibe as informações do candidato no display
             String info = "<html><div style='text-align:center;'>";
             info += candidato.getNome() + "<br>";
             info += "Ano: " + candidato.getAno() + "<br>";
-            info += "<img src='" + candidato.getPoster().toString() + "'><br>";
+            info += "<img src='" + candidato.getPoster() + "'><br>";
             info += "</div></html>";
             labelDisplay.setText(info);
-        } else {
+            eleitor.setVoto(candidato.getAno());
+
+        } 
+        
+        else {
             // Exibe informação de voto nulo no display
             labelDisplay.setText("<html><div style='text-align:center;'>VOTO NULO</div></html>");
         }
@@ -118,7 +124,7 @@ public class TelaUrna extends JFrame implements ActionListener {
         } 
         
         else if (source == botaoConfirma) {
-            
+            Escrita.escreverVoto(eleitor);
         }
         
         else {
@@ -129,13 +135,10 @@ public class TelaUrna extends JFrame implements ActionListener {
                 labelDisplay.setText(voto);
             }
 
-            if(voto.length() == 4)
-                exibirInfo();
+            if(voto.length() == 4){
+                Candidatos candidato = Leitura.getCandidato(voto);
+                exibirInfo(candidato);
+            }
         }
-    }
-    
-    public static void main(String[] args) {
-        TelaUrna urna = new TelaUrna();
-        urna.setVisible(true);
     }
  }

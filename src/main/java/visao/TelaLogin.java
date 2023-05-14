@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import servico.*;
+import modelo.*;
 
 public class TelaLogin extends JFrame implements ActionListener {
 
@@ -41,15 +42,17 @@ public TelaLogin() {
 public void actionPerformed(ActionEvent evt) {
     if (evt.getSource() == btnEntrar) {
         // Verifica se o CPF é válido
-        String cpf = txtCpf.getText();
+        String cpf = txtCpf.getText().replaceAll("[^0-9]", "");
         if (Validacao.cpf(cpf)) {
             // Abre a urna eletrônica
-            TelaUrna urna = new TelaUrna();
+            TelaUrna urna = new TelaUrna(cpf);
             urna.setVisible(true);
 
             // Fecha a tela de login
             dispose();
-        } else {
+        } 
+        
+        else {
             // Mostra mensagem de erro
             JOptionPane.showMessageDialog(this, "CPF inválido", "Erro", JOptionPane.ERROR_MESSAGE);
         }

@@ -1,14 +1,17 @@
 package modelo;
 
 public class Eleitores {
-    private int cpf;
+    private String cpf;
     private String voto;
 
-    public int getCpf() {
+    public Eleitores(){
+    }
+
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

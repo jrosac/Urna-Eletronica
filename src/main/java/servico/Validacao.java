@@ -3,8 +3,6 @@ package servico;
 public class Validacao {
 
     public static boolean cpf(String cpf) {
-        // remove caracteres não-numéricos
-        cpf = cpf.replaceAll("[^0-9]", "");
 
         // CPF deve ter 11 dígitos
         if (cpf.length() != 11) {
