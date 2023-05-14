@@ -14,6 +14,7 @@ public class TelaUrna extends JFrame implements ActionListener {
     private JButton botaoBranco;
     private JButton botaoCorrige;
     private JButton botaoConfirma;
+    Candidatos candidato = Leitura.getCandidato(voto);
     
     public TelaUrna() {
         super("Urna Eletronica");
@@ -83,12 +84,24 @@ public class TelaUrna extends JFrame implements ActionListener {
         labelDisplay.setOpaque(true);
         labelDisplay.setHorizontalAlignment(JLabel.CENTER);
         labelDisplay.setFont(new Font("Arial", Font.BOLD, 48));
-        painelUrna.add(labelDisplay, BorderLayout.NORTH);    
+        painelUrna.add(labelDisplay, BorderLayout.EAST);    
     }
 
     private void exibirInfo() {
-        
-    }    
+    
+        if (candidato != null) {
+            // Exibe as informações do candidato no display
+            String info = "<html><div style='text-align:center;'>";
+            info += candidato.getNome() + "<br>";
+            info += "Ano: " + candidato.getAno() + "<br>";
+            info += "<img src='" + candidato.getPoster().toString() + "'><br>";
+            info += "</div></html>";
+            labelDisplay.setText(info);
+        } else {
+            // Exibe informação de voto nulo no display
+            labelDisplay.setText("<html><div style='text-align:center;'>VOTO NULO</div></html>");
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -114,7 +127,9 @@ public class TelaUrna extends JFrame implements ActionListener {
                 voto += button.getText();
                 labelDisplay.setText(voto);
             }
-            exibirInfo();
+
+            if(voto.length() == 4)
+                exibirInfo();
         }
     }
     
